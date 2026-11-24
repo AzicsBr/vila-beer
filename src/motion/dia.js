@@ -61,6 +61,7 @@ export function dia(lenis) {
   const total = tl.duration();
   const paradas = horas.map((_, i) => (i === 0 ? 0 : i === n - 1 ? 1 : (i + 0.2) / total));
   const toque = matchMedia('(pointer: coarse)').matches;
+  const porHora = toque ? 1.5 : 1; // telas de rolagem por hora
 
   // nas horas de fundo escuro (23h), o botão nori da nav ganha borda creme para não sumir no fundo
   const nav = document.querySelector('.nav') ?? document.createElement('i');
@@ -77,12 +78,12 @@ export function dia(lenis) {
   const st = ScrollTrigger.create({
     trigger: secao,
     start: 'top top',
-    end: () => `+=${(n - 1) * window.innerHeight}`,
+    end: () => `+=${(n - 1) * window.innerHeight * porHora}`,
     pin: secao.querySelector('.dia__palco'),
-    scrub: 0.6,
+    scrub: toque ? 0.3 : 0.6,
     animation: tl,
     onUpdate: (s) => { marca(Math.min(n - 1, Math.floor(s.progress * (n - 1) + 0.15))); navEscura(); },
-    snap: toque ? { snapTo: paradas, duration: { min: 0.3, max: 0.8 }, delay: 0.05, ease: 'power2.inOut' } : false,
+    snap: toque ? { snapTo: paradas, duration: { min: 0.25, max: 0.6 }, delay: 0.2, ease: 'power1.inOut', inertia: false } : false,
   });
 
   ScrollTrigger.create({

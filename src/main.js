@@ -65,7 +65,7 @@ if (!reduzido) heroScroll();
 dia(lenis);
 virada(reduzido);
 panorama();
-cardapio();
+cardapio(lenis);
 mural();
 if (!reduzido) fecho();
 

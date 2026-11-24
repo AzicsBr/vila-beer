@@ -143,12 +143,13 @@
 }
 
 @media (max-width: 760px) {
+  /* no celular a palavra fica acima da fila, inteira (atrás dos cards ela quase sumia) */
   .cardapio__palavra {
-    top: 40%;
+    top: calc(var(--nav-h) + 15vw);
   }
 
   .cardapio__fila {
-    top: 47%;
+    top: 56%;
   }
 
   .prato {
@@ -158,4 +159,41 @@
   .cardapio__botao {
     bottom: 5vh;
   }
+}
+
+/* dica de deslizar: só em tela de toque (o gesto de lado existe só nela) */
+.cardapio__dica {
+  display: none;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .cardapio__dica {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: calc(5vh + 66px);
+    display: block;
+    margin: 0;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--cor-papel);
+    opacity: 0.85;
+  }
+
+  .cardapio__dica::after {
+    content: ' →';
+    display: inline-block;
+    animation: aponta 1.4s ease-in-out infinite;
+  }
+}
+
+@keyframes aponta {
+  50% { translate: 6px 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cardapio__dica::after { animation: none; }
 }
