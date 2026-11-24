@@ -7,9 +7,11 @@ import { resolve } from 'node:path';
 const MARCA = /<!--\s*@secao\s+([\w-]+)\s*-->/g;
 const inclui = (html) =>
   html.replace(MARCA, (_, nome) => inclui(readFileSync(resolve(import.meta.dirname, `src/sections/${nome}.html`), 'utf8')));
+// comentários internos das seções (preço provisório, fotos de banco...) não vão para o HTML publicado
+const limpa = (html) => html.replace(/[ \t]*<!--(?!\s*@secao)[\s\S]*?-->\n?/g, '');
 const secoes = () => ({
   name: 'secoes',
-  transformIndexHtml: { order: 'pre', handler: inclui },
+  transformIndexHtml: { order: 'pre', handler: (html) => limpa(inclui(html)) },
   handleHotUpdate({ file, server }) {
     if (file.includes('/src/sections/') && file.endsWith('.html')) server.ws.send({ type: 'full-reload' });
   },

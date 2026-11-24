@@ -14,6 +14,7 @@ import { loader } from './motion/loader.js';
 import { heroEntrada, heroScroll, heroArrasta } from './motion/hero.js';
 import { petalas } from './motion/petalas.js';
 import { dia } from './motion/dia.js';
+import { virada } from './motion/virada.js';
 import { panorama } from './motion/panorama.js';
 import { cardapio } from './motion/cardapio.js';
 import { mural } from './motion/mural.js';
@@ -26,8 +27,15 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 window.scrollTo(0, 0);
 
 const html = document.documentElement;
+html.dataset.vivo = ''; // o plano B do <head> (index.html) só age se este módulo não rodar
 const reduzido = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const semEntrada = reduzido || new URLSearchParams(location.search).has('pronto');
+// a abertura toca só na primeira visita da sessão (quem volta do WhatsApp ou recarrega não espera de novo)
+let jaViu = false;
+try { jaViu = sessionStorage.getItem('villa-abertura') === '1'; sessionStorage.setItem('villa-abertura', '1'); } catch {}
+const semEntrada = reduzido || jaViu || new URLSearchParams(location.search).has('pronto');
+// durante a abertura nada atrás dela recebe foco nem clique (teclado, Tab, leitor de tela)
+const conteudo = [...document.querySelectorAll('body > header, body > main, body > footer')];
+conteudo.forEach((el) => { el.inert = true; });
 document.body.classList.add('carregando');
 
 // as fontes que as palavras gigantes e o japonês usam, com o texto de cada uma (o navegador baixa só o que precisa)
@@ -39,7 +47,8 @@ const fontes = Promise.all([
 ]).catch(() => {});
 // os recortes do hero decodificados antes de a abertura sair
 const imagens = [...document.querySelectorAll('.hero img')].map((img) => img.decode().catch(() => {}));
-const pronto = Promise.all([fontes, ...imagens]);
+// rede lenta: a abertura não espera o logo para sempre
+const pronto = Promise.race([Promise.all([fontes, ...imagens]), new Promise((r) => setTimeout(r, 6000))]);
 
 const lenis = smooth();
 lenis.stop();
@@ -55,11 +64,9 @@ const pe = () => palavra?.parentElement.style.setProperty('--pe-palavra', `${pal
 pe();
 addEventListener('resize', pe);
 
-if (!reduzido) {
-  heroScroll();
-  petalas();
-}
+if (!reduzido) heroScroll();
 dia(lenis);
+virada(reduzido);
 panorama();
 cardapio();
 mural();
@@ -67,10 +74,18 @@ if (!reduzido) fecho();
 
 const entrada = semEntrada ? null : heroEntrada().pause();
 await loader(pronto, semEntrada);
+conteudo.forEach((el) => { el.inert = false; });
 document.body.classList.remove('carregando');
+window.scrollTo(0, 0);
 lenis.start();
+// as partículas só começam quando a abertura sai (antes, animavam escondidas e disputavam quadro com a caneca)
+if (!reduzido) petalas();
 entrada?.play();
 ScrollTrigger.refresh();
 requestAnimationFrame(() => requestAnimationFrame(() => html.classList.add('assentou')));
 
-addEventListener('load', () => ScrollTrigger.refresh());
+if (document.readyState !== 'complete') addEventListener('load', () => ScrollTrigger.refresh());
+
+// link com âncora vindo de fora (ex.: …/#visitar): rola até ela depois que os pins foram medidos
+const alvo = location.hash.length > 1 && document.querySelector(location.hash);
+if (alvo) requestAnimationFrame(() => lenis.scrollTo(alvo, { immediate: true }));

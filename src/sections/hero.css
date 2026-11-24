@@ -1,7 +1,7 @@
 .hero {
   position: relative;
   height: 100svh;
-  min-height: 640px;
+  min-height: min(640px, 100svh);
   overflow: hidden;
   background: var(--cor-hero);
   background-image: var(--textura-madeira);
@@ -244,7 +244,7 @@
 
 @media (max-width: 760px) {
   .hero {
-    min-height: 600px;
+    min-height: min(600px, 100svh);
   }
 
   .moldura {
@@ -297,5 +297,28 @@
     right: var(--margem);
     bottom: 28px;
     justify-content: space-between;
+  }
+}
+
+/* telas bem estreitas (320 px): o horário em cima do botão, sem espremer */
+@media (max-width: 360px) {
+  .hero__frase {
+    bottom: 132px;
+  }
+
+  .hero__pedido {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .hero__hoje {
+    white-space: nowrap;
+  }
+
+  /* sem espaço para tudo: a frase fica livre */
+  .selo,
+  .hero__bolacha2 {
+    display: none;
   }
 }

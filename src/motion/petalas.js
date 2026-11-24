@@ -45,7 +45,7 @@ function camada(canvas, base, mobile, forma) {
     });
 
   const mede = () => {
-    const dpr = Math.min(devicePixelRatio || 1, 2);
+    const dpr = innerWidth <= 760 ? 1 : Math.min(devicePixelRatio || 1, 2);
     w = canvas.clientWidth;
     h = canvas.clientHeight;
     canvas.width = Math.round(w * dpr);

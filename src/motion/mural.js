@@ -21,7 +21,7 @@ export function mural() {
   const queda = gsap.timeline({ paused: true }).fromTo(
     fotos,
     { y: -160, rotation: () => gsap.utils.random(-30, 30), autoAlpha: 0 },
-    { y: 0, rotation: 0, autoAlpha: 1, duration: 0.9, stagger: 0.09, ease: 'back.out(1.3)', force3D: true },
+    { y: 0, rotation: (i, el) => parseFloat(getComputedStyle(el).getPropertyValue('--r')) || 0, autoAlpha: 1, duration: 0.9, stagger: 0.09, ease: 'back.out(1.3)', force3D: true },
   );
 
   ScrollTrigger.create({ trigger: campo, start: 'top bottom+=150%', once: true, onEnter: carrega });

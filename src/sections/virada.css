@@ -1,0 +1,189 @@
+/* Virada 2027: fundo da noite mais escura, o nome gigante em âmbar e um ingresso de papel com as reservas */
+.virada {
+  position: relative;
+  overflow: hidden;
+  padding: calc(var(--nav-h) + 6vh) var(--margem) 0;
+  /* folga para o arco do cardápio, que sobe por cima desta seção */
+  padding-bottom: calc(clamp(70px, 12vw, 160px) + 8vh);
+  background: var(--cor-tinta);
+  background-image: var(--textura-grao);
+  color: var(--cor-papel);
+}
+
+.virada__brilho {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: calc(34px * var(--t));
+  aspect-ratio: 1;
+  background: var(--cor-quente);
+  clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%);
+  animation: pisca 2.8s ease-in-out var(--d) infinite;
+  pointer-events: none;
+}
+
+.virada__brilho:nth-child(even) {
+  background: var(--cor-papel);
+}
+
+@keyframes pisca {
+  0%, 100% { scale: 0.55; opacity: 0.35; rotate: 0deg; }
+  50% { scale: 1; opacity: 1; rotate: 45deg; }
+}
+
+.virada__data {
+  position: relative;
+  display: inline-block;
+  margin: 0 0 2vh;
+  padding: 10px 16px;
+  border: 2.5px solid var(--cor-tinta);
+  background: var(--cor-quente);
+  color: var(--cor-tinta);
+  font-family: var(--ff-display);
+  font-size: clamp(14px, 1.4vw, 19px);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  rotate: -4deg;
+  box-shadow: 4px 4px 0 var(--cor-papel);
+}
+
+.virada__titulo {
+  position: relative;
+  margin: 0;
+  font-family: var(--ff-display);
+  font-weight: 400;
+  line-height: 0.86;
+}
+
+.virada__palavra {
+  display: block;
+  width: max-content;
+  color: var(--cor-quente);
+  text-shadow: 0.055em 0.055em 0 var(--cor-hero);
+}
+
+.virada__ano {
+  display: block;
+  margin-top: 0.06em;
+  font-size: clamp(64px, 14vw, 210px);
+  color: var(--cor-papel);
+  text-shadow: 0.055em 0.055em 0 var(--cor-hero);
+}
+
+.virada__corpo {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr minmax(320px, 420px);
+  gap: 5vw;
+  align-items: center;
+  margin-top: 5vh;
+}
+
+.virada__texto p {
+  margin: 0;
+  max-width: 34ch;
+  font-size: clamp(18px, 1.6vw, 23px);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.virada__itens {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 22px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.virada__itens li {
+  padding: 8px 16px;
+  border: 2px solid var(--cor-papel);
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+/* ingresso de papel com as bordas picotadas dos lados */
+.ingresso {
+  position: relative;
+  padding: 26px 30px 24px;
+  background: var(--cor-papel);
+  color: var(--cor-tinta);
+  rotate: 3deg;
+  filter: drop-shadow(6px 6px 0 var(--cor-quente));
+  -webkit-mask:
+    radial-gradient(circle at 0 50%, transparent 14px, #000 14.5px) left / 51% 100% no-repeat,
+    radial-gradient(circle at 100% 50%, transparent 14px, #000 14.5px) right / 51% 100% no-repeat;
+  mask:
+    radial-gradient(circle at 0 50%, transparent 14px, #000 14.5px) left / 51% 100% no-repeat,
+    radial-gradient(circle at 100% 50%, transparent 14px, #000 14.5px) right / 51% 100% no-repeat;
+}
+
+.ingresso__rotulo {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.ingresso__numero {
+  margin: 6px 0 12px;
+  font-family: var(--ff-display);
+  font-size: clamp(34px, 3.4vw, 46px);
+  line-height: 1;
+  color: var(--cor-hero);
+}
+
+.ingresso__barra {
+  height: 18px;
+  border: 2.5px solid var(--cor-tinta);
+  border-radius: 999px;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--cor-tinta) 10%, transparent);
+}
+
+.ingresso__barra i {
+  display: block;
+  height: 100%;
+  width: 70%;
+  background: var(--cor-acento);
+  border-right: 2.5px solid var(--cor-tinta);
+  transform-origin: left center;
+}
+
+.ingresso__botao {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.ingresso__link {
+  display: block;
+  margin-top: 12px;
+  padding: 10px 0;
+  text-align: center;
+  color: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 760px) {
+  .virada__corpo {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+
+  .ingresso {
+    rotate: 2deg;
+    padding: 24px 26px 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .virada__brilho {
+    animation: none;
+  }
+}

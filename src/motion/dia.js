@@ -68,7 +68,7 @@ export function dia(lenis) {
   let atual = 0;
   const marca = (i) => {
     atual = i;
-    botoes.forEach((b, k) => b.classList.toggle('ativo', k === i));
+    botoes.forEach((b, k) => { b.classList.toggle('ativo', k === i); b.toggleAttribute('aria-current', k === i); });
   };
   let sobNav = false; // a seção está atrás da nav (do topo da seção até o pé dela passar a nav)
   const navEscura = () => nav.classList.toggle('nav--escuro', sobNav && escura[atual]);
@@ -136,7 +136,9 @@ export function dia(lenis) {
       return true;
     }
     // próxima hora à frente (depois de subir livre, a posição pode estar entre duas horas)
-    vaiPara(paradas.findIndex((_, i) => parada(i) > y + 8));
+    const prox = paradas.findIndex((_, i) => parada(i) > y + 8);
+    if (prox < 0) return true; // entre a última hora e o fim do pin: segue a página (sem isso, parada(-1) mandava ao topo)
+    vaiPara(prox);
     return segura();
   };
 

@@ -1,12 +1,29 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" translate="no">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Villa Beer Cervejaria · Alterosa - MG</title>
   <meta name="description" content="Chopp gelado, drinks, pizzas e porções com música ao vivo, de quarta a sábado, das 19h à 0h, em Alterosa - MG.">
   <meta name="theme-color" content="#6B3A1F">
+  <!-- demo de apresentação: fora do Google até virar o site oficial (sem Disallow no robots, para o noindex ser lido) -->
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://villabeer.azics.com.br/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Villa Beer Cervejaria">
+  <meta property="og:title" content="Villa Beer Cervejaria · Alterosa - MG">
+  <meta property="og:description" content="Chopp gelado, drinks, pizzas e porções, de quarta a sábado, das 19h à 0h. Reserve pelo WhatsApp.">
+  <meta property="og:url" content="https://villabeer.azics.com.br/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:image" content="https://villabeer.azics.com.br/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="VILLA em letras gigantes com o logo da Villa Beer Cervejaria sobre fundo de madeira">
+  <meta name="twitter:image" content="https://villabeer.azics.com.br/og.jpg">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <!-- primeira pintura: nunca a página crua. A cor da abertura liga aqui, antes de qualquer arquivo;
        a folha do site vem em <link> (segura a pintura até chegar), nunca pelo JS. Ao trocar a paleta em tokens.css,
        troque aqui a cor de fundo (a --cor-fria do tema, que é a cor da abertura). -->
@@ -16,6 +33,15 @@
       // a cor da abertura (a --cor-fria de tokens.css): troque as duas juntas
       d.style.backgroundColor = '#1b2a3a';
       d.classList.add('js');
+      // plano B: se o módulo do site não rodar (rede, bloqueador, navegador antigo), a abertura sai em 5 s
+      setTimeout(function () {
+        if ('vivo' in d.dataset) return;
+        var l = document.querySelector('.loader');
+        if (l) l.remove();
+        d.classList.remove('js');
+        document.body.classList.remove('carregando');
+        d.style.backgroundColor = '';
+      }, 5000);
     })();
   </script>
   <style>
@@ -27,7 +53,7 @@
     .loader__passo span:not(:first-child) { display: none; }
   </style>
   <link rel="stylesheet" href="/src/styles/site.css">
-  <link rel="preload" as="image" href="/img/logo.webp" fetchpriority="high">
+  <link rel="preload" as="image" href="/img/logo.webp">
 </head>
 <body>
   <!-- @secao loader -->
@@ -36,11 +62,12 @@
     <!-- @secao hero -->
     <!-- @secao faixas -->
     <!-- @secao dia -->
+    <!-- @secao virada -->
     <!-- @secao cardapio -->
     <!-- @secao mural -->
     <!-- @secao avisos -->
-    <!-- @secao fecho -->
   </main>
+  <!-- @secao fecho -->
   <!-- @secao fresco -->
   <script type="module" src="/src/main.js"></script>
 </body>

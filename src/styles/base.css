@@ -26,7 +26,8 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-body.carregando {
+body.carregando,
+html:has(body.carregando) {
   overflow: hidden;
 }
 
@@ -114,8 +115,10 @@ button {
 }
 
 :focus-visible {
-  outline: 3px solid var(--cor-acento);
-  outline-offset: 3px;
+  /* anel duplo (escuro por dentro, creme por fora): aparece em qualquer fundo da página */
+  outline: 3px solid var(--cor-tinta);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 8px var(--cor-papel);
 }
 
 @media (prefers-reduced-motion: reduce) {

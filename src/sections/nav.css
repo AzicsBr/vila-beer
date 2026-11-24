@@ -15,6 +15,7 @@
 }
 
 .nav__logo {
+  white-space: nowrap;
   justify-self: start;
   display: inline-flex;
   align-items: center;
@@ -84,7 +85,8 @@
 }
 
 /* sobre fundo escuro (a hora 23h do dia), a pílula nori ganha borda creme */
-.nav--escuro .nav__cta {
+.nav--escuro .nav__cta,
+.nav--virada .nav__cta {
   border-color: var(--cor-papel);
 }
 
@@ -94,6 +96,17 @@
     rotate: 0deg;
     scale: 1.05;
     box-shadow: 0 0.55em 1.2em -0.3em color-mix(in srgb, var(--cor-tinta) 55%, transparent);
+  }
+}
+
+/* entre 761 e 1000 px as pílulas não cabem ao lado do logo e do botão */
+@media (max-width: 1000px) {
+  .nav {
+    grid-template-columns: 1fr auto;
+  }
+
+  .nav__links {
+    display: none;
   }
 }
 
@@ -116,5 +129,18 @@
     height: 48px;
     padding: 0 20px;
     font-size: 15px;
+  }
+}
+
+/* 320 px: logo e botão cabem lado a lado */
+@media (max-width: 360px) {
+  .nav__logo {
+    font-size: 17px;
+    padding: 0 12px;
+  }
+
+  .nav__cta {
+    padding: 0 14px;
+    font-size: 14px;
   }
 }

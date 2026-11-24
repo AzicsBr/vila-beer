@@ -15,6 +15,8 @@ export function smooth() {
       if (!alvo) return;
       e.preventDefault();
       lenis.scrollTo(alvo, { duration: 1.4 });
+      if (!alvo.hasAttribute('tabindex')) alvo.setAttribute('tabindex', '-1');
+      alvo.focus({ preventScroll: true });
     });
   });
   return lenis;

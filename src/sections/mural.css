@@ -18,8 +18,9 @@
   font-weight: 400;
   font-size: clamp(46px, 7vw, 116px);
   line-height: 0.95;
-  color: var(--cor-papel);
-  text-shadow: var(--sombra);
+  /* escuro sobre o âmbar (creme dava 1,7:1), com a sombra dura em creme */
+  color: var(--cor-tinta);
+  text-shadow: 0.055em 0.055em 0 var(--cor-papel);
 }
 
 .mural__topo p {

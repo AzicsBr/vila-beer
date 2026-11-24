@@ -5,14 +5,12 @@
   background: var(--bg);
   background-image: var(--textura-grao);
   color: var(--t);
-  /* folga para o arco do cardápio, que sobe por cima da seção anterior: sem ela, o arco cobre as pílulas da última hora */
-  padding-bottom: clamp(70px, 12vw, 160px);
 }
 
 .dia__palco {
   position: relative;
   height: 100svh;
-  min-height: 600px;
+  min-height: min(600px, 100svh);
   overflow: hidden;
 }
 
@@ -185,5 +183,35 @@
     height: 44px;
     padding: 0 13px;
     font-size: 13px;
+  }
+}
+
+/* celular deitado e telas baixas: tudo da hora cabe na altura enquanto a seção está presa */
+@media (max-height: 520px) and (min-width: 761px) {
+  .hora {
+    padding-top: calc(var(--nav-h) + 4px);
+    padding-bottom: 14svh;
+  }
+
+  .hora__num {
+    font-size: 24svh;
+  }
+
+  .hora__titulo {
+    margin-top: 1svh;
+    font-size: 22px;
+  }
+
+  .hora__texto {
+    margin-top: 6px;
+    font-size: 14px;
+  }
+
+  .hora__fotos {
+    width: min(100%, 68svh);
+  }
+
+  .dia__horas {
+    bottom: 3svh;
   }
 }
