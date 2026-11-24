@@ -3,3 +3,7 @@ dist/
 _teste/
 .superpowers/
 video/saida/
+
+# kit Shari e guia do kit: só na máquina local (o repositório é público)
+arquivos/
+CLAUDE.md
