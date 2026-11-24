@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Villa Beer Cervejaria · Alterosa - MG</title>
+  <meta name="description" content="Chopp gelado, drinks, pizzas e porções com música ao vivo, de quarta a sábado, das 19h à 0h, em Alterosa - MG.">
+  <meta name="theme-color" content="#6B3A1F">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <!-- primeira pintura: nunca a página crua. A cor da abertura liga aqui, antes de qualquer arquivo;
+       a folha do site vem em <link> (segura a pintura até chegar), nunca pelo JS. Ao trocar a paleta em tokens.css,
+       troque aqui a cor de fundo (a --cor-fria do tema, que é a cor da abertura). -->
+  <script>
+    (function () {
+      var d = document.documentElement;
+      // a cor da abertura (a --cor-fria de tokens.css): troque as duas juntas
+      d.style.backgroundColor = '#1b2a3a';
+      d.classList.add('js');
+    })();
+  </script>
+  <style>
+    body { margin: 0; }
+    /* nada de transição no primeiro quadro: a trava sai depois que a abertura termina (main.js) */
+    html:not(.assentou) .botao, html:not(.assentou) .nav a { transition: none !important; }
+    /* as partes do desenho da abertura nascem escondidas e se montam pelo JS; a legenda mostra só o primeiro passo */
+    .js .loader [data-passo] { visibility: hidden; }
+    .loader__passo span:not(:first-child) { display: none; }
+  </style>
+  <link rel="stylesheet" href="/src/styles/site.css">
+  <link rel="preload" as="image" href="/img/logo.webp" fetchpriority="high">
+</head>
+<body>
+  <!-- @secao loader -->
+  <!-- @secao nav -->
+  <main>
+    <!-- @secao hero -->
+    <!-- @secao faixas -->
+    <!-- @secao dia -->
+    <!-- @secao cardapio -->
+    <!-- @secao mural -->
+    <!-- @secao avisos -->
+    <!-- @secao fecho -->
+  </main>
+  <!-- @secao fresco -->
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

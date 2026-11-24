@@ -1,0 +1,301 @@
+.hero {
+  position: relative;
+  height: 100svh;
+  min-height: 640px;
+  overflow: hidden;
+  background: var(--cor-hero);
+  background-image: var(--textura-madeira);
+  color: var(--cor-papel);
+}
+
+.hero__palavra {
+  position: absolute;
+  left: 50%;
+  top: calc(var(--nav-h) + 2vh);
+  translate: -50% 0;
+  font-family: var(--ff-display);
+  font-weight: 400;
+  font-size: 21vw;
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  color: var(--cor-papel);
+  text-shadow: var(--sombra);
+  z-index: 1;
+}
+
+/* Moldura de linhas finas com legendas verticais nas margens, como uma página de cartaz */
+.moldura {
+  --linha: color-mix(in srgb, var(--cor-papel) 32%, transparent);
+  --lado: clamp(22px, 2.2vw, 34px);
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.moldura::before,
+.moldura::after {
+  content: '';
+  position: absolute;
+  top: calc(var(--nav-h) - 8px);
+  bottom: 0;
+  width: 1px;
+  background: var(--linha);
+}
+
+.moldura::before { left: var(--lado); }
+.moldura::after { right: var(--lado); }
+
+.moldura__rotulo {
+  position: absolute;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--cor-papel) 72%, transparent);
+  writing-mode: vertical-rl;
+}
+
+.moldura__rotulo--a,
+.moldura__rotulo--b {
+  left: calc(var(--lado) / 2);
+  translate: -50% 0;
+}
+
+.moldura__rotulo--a {
+  rotate: 180deg;
+}
+
+.moldura__rotulo--c,
+.moldura__rotulo--d {
+  right: calc(var(--lado) / 2);
+  translate: 50% 0;
+}
+
+.moldura__rotulo--a { top: calc(var(--nav-h) + 2vh); }
+.moldura__rotulo--b { bottom: clamp(24px, 5vh, 48px); font-size: 11px; letter-spacing: 0.35em; }
+.moldura__rotulo--c { top: calc(var(--nav-h) + 2vh); }
+.moldura__rotulo--d { bottom: clamp(24px, 5vh, 48px); }
+
+/* Pétalas: uma camada atrás do SHARI, uma entre o SHARI e a barca, uma na frente da comida */
+.petalas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.petalas[data-camada='fundo'] { z-index: 0; }
+.petalas[data-camada='meio'] { z-index: 1; }
+.petalas[data-camada='frente'] { z-index: 3; }
+
+.hero__palavra span {
+  display: inline-block;
+  white-space: pre; /* uma letra por <span>; o espaço de um nome com duas palavras também é um <span> */
+}
+
+.hero__barca {
+  position: absolute;
+  left: 50%;
+  top: 60%;
+  width: min(30vw, 46vh, 480px);
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  rotate: -7deg;
+  border-radius: 50%;
+  filter: drop-shadow(0 28px 28px color-mix(in srgb, var(--cor-sombra) 55%, transparent));
+  z-index: 2;
+}
+
+.hero__solto {
+  position: absolute;
+  z-index: 3;
+  filter: drop-shadow(0 14px 16px color-mix(in srgb, var(--cor-sombra) 45%, transparent));
+}
+
+/* bolachas de chopp arrastáveis */
+.hero__bolacha {
+  width: clamp(110px, 11vw, 180px);
+  right: 14vw;
+  top: 66%;
+  rotate: -14deg;
+}
+
+.hero__bolacha2 {
+  width: clamp(100px, 10vw, 160px);
+  left: 15vw;
+  top: 50%;
+  rotate: 18deg;
+}
+
+/* recortes arrastáveis (data-arrasta, só com mouse): o deslocamento vai na propriedade translate e o crescer
+   (1,04 no hover, 1,08 segurando) vai pelo GSAP no hero.js; o GSAP guarda o espelho e a escala no transform dele */
+.pode-arrastar [data-arrasta] {
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: filter 0.25s var(--ease-out);
+}
+
+/* levantado: sombra mais longa, mas na mesma camada (passa por trás do que está na frente) */
+.hero .arrastando {
+  cursor: grabbing;
+  filter: drop-shadow(0 34px 30px color-mix(in srgb, var(--cor-sombra) 40%, transparent));
+}
+
+.hero__etiqueta {
+  position: absolute;
+  z-index: 4;
+  left: 10vw;
+  /* colada no pé do nome: --pe-palavra é medido pelo main.js depois do data-fit (o nome pode ter outro tamanho) */
+  top: var(--pe-palavra, calc(var(--nav-h) + 2vh + 17vw));
+  padding: 10px 16px;
+  border: 2.5px solid var(--cor-tinta);
+  background: var(--cor-fria);
+  color: var(--cor-papel);
+  font-family: var(--ff-display);
+  font-size: clamp(13px, 1.2vw, 17px);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  rotate: -6deg;
+  box-shadow: var(--sombra-caixa);
+}
+
+.selo {
+  position: absolute;
+  z-index: 4;
+  right: 21vw;
+  top: 52%;
+  width: clamp(96px, 9.5vw, 140px);
+  animation: gira 16s linear infinite;
+}
+
+.selo circle {
+  fill: var(--cor-acento);
+  stroke: var(--cor-tinta);
+  stroke-width: 4;
+}
+
+.selo text {
+  font-family: var(--ff-display);
+  font-size: 15.5px;
+  letter-spacing: 1.6px;
+  fill: var(--cor-tinta);
+}
+
+.selo .selo__meio {
+  font-size: 40px;
+  letter-spacing: 0;
+}
+
+@keyframes gira {
+  to {
+    rotate: 360deg;
+  }
+}
+
+.hero__frase {
+  position: absolute;
+  z-index: 4;
+  left: var(--margem);
+  bottom: clamp(24px, 5vh, 48px);
+  max-width: 31ch;
+  font-size: clamp(17px, 1.45vw, 21px);
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.hero__pedido {
+  position: absolute;
+  z-index: 4;
+  right: var(--margem);
+  bottom: clamp(24px, 5vh, 48px);
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.hero__hoje {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.ponto {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--cor-acento);
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--cor-acento) 70%, transparent);
+  animation: pulsa 1.8s ease-out infinite;
+}
+
+@keyframes pulsa {
+  to {
+    box-shadow: 0 0 0 10px color-mix(in srgb, var(--cor-acento) 0%, transparent);
+  }
+}
+
+@media (max-width: 760px) {
+  .hero {
+    min-height: 600px;
+  }
+
+  .moldura {
+    display: none;
+  }
+
+  .hero__palavra {
+    top: calc(var(--nav-h) + 4vh);
+  }
+
+  .hero__barca {
+    width: min(80vw, 44svh);
+    top: max(45%, calc(var(--pe-palavra, 0px) + min(40vw, 22svh) + 6px));
+  }
+
+  .hero__bolacha {
+    width: 24vw;
+    right: -5vw;
+    top: 30%;
+  }
+
+  .hero__bolacha2 {
+    width: 22vw;
+    left: 2vw;
+    top: 58%;
+  }
+
+  /* logo e etiqueta medidos do pé do nome (--pe-palavra, do main.js): em celular baixo nada cobre o VILLA */
+  .hero__etiqueta {
+    left: 6vw;
+    top: calc(var(--pe-palavra, 23%) + 8px);
+    font-size: 12px;
+  }
+
+  .selo {
+    right: 6vw;
+    top: auto;
+    bottom: 170px;
+    width: 86px;
+  }
+
+  .hero__frase {
+    bottom: 104px;
+    max-width: 26ch;
+    font-size: 16px;
+  }
+
+  .hero__pedido {
+    left: var(--margem);
+    right: var(--margem);
+    bottom: 28px;
+    justify-content: space-between;
+  }
+}

@@ -1,0 +1,80 @@
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  background: var(--cor-fria);
+  background-image: var(--textura-grao);
+  color: var(--cor-papel);
+  /* cor do desenho da caneca (só da abertura) */
+  --copo-bolha: color-mix(in srgb, var(--cor-papel) 70%, var(--cor-quente));
+}
+
+.loader__box {
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+}
+
+.copo {
+  width: min(44vw, 210px);
+  overflow: visible;
+}
+
+.copo__sombra {
+  fill: rgba(0, 0, 0, 0.32);
+}
+
+.copo__corpo,
+.copo__alca {
+  fill: color-mix(in srgb, var(--cor-papel) 18%, transparent);
+  stroke: var(--cor-tinta);
+  stroke-width: 6;
+  stroke-linejoin: round;
+}
+
+.copo__alca {
+  fill: none;
+  stroke-width: 14;
+}
+
+.copo__liquido {
+  fill: var(--cor-quente);
+}
+
+.copo__bolhas circle {
+  fill: var(--copo-bolha);
+}
+
+.copo__reflexo {
+  fill: none;
+  stroke: var(--copo-bolha);
+  stroke-width: 7;
+  stroke-linecap: round;
+  opacity: 0.7;
+}
+
+.copo__espuma,
+.copo__gota {
+  fill: var(--cor-papel);
+  stroke: var(--cor-tinta);
+  stroke-width: 5;
+  stroke-linejoin: round;
+}
+
+.loader__passo {
+  font-family: var(--ff-display);
+  font-size: clamp(18px, 2vw, 24px);
+  letter-spacing: 0.01em;
+  min-height: 1.4em;
+}
+
+.loader__onda {
+  position: absolute;
+  top: calc(100% - 1px); /* 1 px por baixo da caixa: sem fresta na subida */
+  left: 0;
+  width: 100%;
+  height: clamp(50px, 8vw, 120px);
+  fill: var(--cor-fria);
+}

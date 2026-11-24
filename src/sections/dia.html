@@ -1,0 +1,37 @@
+<!-- A noite em horários (src/motion/dia.js): uma <article class="hora"> por horário, quantas quiser (3 a 6 ficam bem).
+     data-cor e data-texto: o fundo e o texto da hora; data-num e data-num-sombra: a cor do número gigante e da sombra
+     dele. Tudo pelo nome do papel em tokens.css (fria, papel, acento, tinta, hero, quente) ou uma cor #hex.
+     19h e 0h vêm da bio do Instagram; 20h, do post da Resenha. Os textos são provisórios. -->
+<section class="dia" id="dia" aria-label="A noite no Villa">
+  <div class="dia__palco">
+    <article class="hora" data-cor="fria" data-texto="papel" data-num="papel">
+      <h2 class="hora__num">19h</h2>
+      <h3 class="hora__titulo">Abre a casa</h3>
+      <p class="hora__texto">A torneira já está gelada e as mesas de madeira, postas. O primeiro chopp sai antes de a noite esfriar.</p>
+      <div class="hora__fotos">
+        <img src="/img/dia/19h-bar.webp" alt="Balcão de bar de madeira com luz quente no começo da noite" width="960" height="1200" loading="lazy" />
+        <img src="/img/dia/19h-chopp.webp" alt="Chopp sendo tirado na torneira" width="960" height="1200" loading="lazy" />
+      </div>
+    </article>
+    <article class="hora" data-cor="quente" data-texto="tinta" data-num="papel">
+      <h2 class="hora__num">20h</h2>
+      <h3 class="hora__titulo">Sobe o palco</h3>
+      <p class="hora__texto">Sertanejo, sanfona, voz e violão ou DJ: toda semana tem atração nova. Quem toca sai no Instagram.</p>
+      <div class="hora__fotos">
+        <img src="/img/dia/20h-palco.webp" alt="Banda tocando ao vivo num palco pequeno" width="960" height="1200" loading="lazy" />
+        <img src="/img/dia/20h-plateia.webp" alt="Pessoas curtindo o show com copos na mão" width="960" height="1200" loading="lazy" />
+      </div>
+    </article>
+    <article class="hora" data-cor="tinta" data-texto="papel" data-num="quente" data-num-sombra="hero">
+      <h2 class="hora__num">0h</h2>
+      <h3 class="hora__titulo">Último chopp</h3>
+      <p class="hora__texto">A casa fecha à meia-noite. Dá tempo de mais um brinde, e de marcar a próxima quarta.</p>
+      <div class="hora__fotos">
+        <img src="/img/dia/00h-brinde.webp" alt="Amigos brindando com chopp" width="960" height="1200" loading="lazy" />
+        <img src="/img/dia/00h-noite.webp" alt="Bar com luzes baixas no fim da noite" width="960" height="1200" loading="lazy" />
+      </div>
+    </article>
+    <!-- as pílulas saem das horas acima (o texto de .hora__num), em src/motion/dia.js -->
+    <nav class="dia__horas" aria-label="Horários"></nav>
+  </div>
+</section>

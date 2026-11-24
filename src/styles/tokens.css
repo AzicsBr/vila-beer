@@ -1,0 +1,45 @@
+/* Cores em papéis, nunca pelo nome: trocar a paleta é mudar só este bloco (e a cor de fundo do <head> do index.html).
+   Paleta "villa": madeira, cobre, creme do letreiro, noite, âmbar do chopp e lúpulo.
+   Regra de contraste: texto creme (--cor-papel) só sobre --cor-hero, --cor-fria e --cor-tinta; texto escuro
+   (--cor-tinta) sobre --cor-papel, --cor-quente e --cor-acento. A sombra dura dos títulos é sempre --cor-tinta, então
+   --cor-hero e --cor-fria precisam ser médios ou escuros, mas não pretos. */
+:root {
+  --cor-hero: #6b3a1f;    /* madeira/cobre: hero, fecho, logo */
+  --cor-papel: #f3e3c3;   /* creme do letreiro: texto sobre cor, comanda, cards claros */
+  --cor-tinta: #140d09;   /* quase preto amadeirado: sombra dura, texto, botão escuro */
+  --cor-fria: #1b2a3a;    /* azul da noite: abertura, cardápio, etiqueta, 1ª hora */
+  --cor-quente: #e8a33d;  /* âmbar do chopp: mural, palavras gigantes */
+  --cor-acento: #9db04a;  /* verde lúpulo: selo, foco, botão de destaque, ponto "aberto" */
+  --cor-destaque: #ffd45c; /* o selo "Gelado!" que segue o cursor */
+  /* sombra projetada dos recortes e das fotos: o hero escurecido, para a sombra ter a cor do fundo */
+  --cor-sombra: color-mix(in srgb, var(--cor-hero) 30%, black);
+
+  /* texturas sutis desenhadas em SVG (sem arquivo): veio de madeira no hero e no fecho, granulado nos fundos escuros.
+     A cor vem do fundo de baixo; a textura só escurece (madeira) ou clareia (granulado) um pouco. */
+  --textura-madeira: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='480' height='480'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.0035 0.11' numOctaves='4' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.05 0 0 0 0 0.02 0 0 0 0 0.01 1.25 0 0 0 -0.54'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E");
+  --textura-grao: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.96 0 0 0 0 0.9 0 0 0 0 0.8 0.42 0 0 0 -0.17'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+
+  --ff-display: 'Alfa Slab One', 'Rockwell', Georgia, system-ui, sans-serif;
+  --ff-texto: 'Zen Kaku Gothic New', system-ui, sans-serif;
+
+  /* sombra dura dos títulos: proporcional ao tamanho da letra */
+  --sombra: 0.055em 0.055em 0 var(--cor-tinta);
+  --sombra-caixa: 5px 5px 0 var(--cor-tinta);
+
+  --raio: 22px;
+  --borda: 6px;
+  --margem: clamp(16px, 3vw, 44px);
+  --nav-h: 96px;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+@media (max-width: 760px) {
+  :root {
+    --nav-h: 74px;
+    --borda: 4px;
+    --raio: 16px;
+    --sombra-caixa: 3px 3px 0 var(--cor-tinta);
+  }
+}

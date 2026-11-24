@@ -1,0 +1,131 @@
+.mural {
+  position: relative;
+  overflow-x: clip;
+  padding: 16vh var(--margem) 5vh;
+  background: var(--cor-quente);
+  color: var(--cor-tinta);
+}
+
+.mural__topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 24px;
+}
+
+.mural__topo h2 {
+  font-family: var(--ff-display);
+  font-weight: 400;
+  font-size: clamp(46px, 7vw, 116px);
+  line-height: 0.95;
+  color: var(--cor-papel);
+  text-shadow: var(--sombra);
+}
+
+.mural__topo p {
+  max-width: 26ch;
+  font-size: clamp(16px, 1.3vw, 19px);
+  font-weight: 500;
+}
+
+.mural__dica {
+  display: block;
+  font-weight: 700;
+}
+
+.mural__campo {
+  position: relative;
+  height: clamp(720px, 64vw, 980px);
+  margin-top: 5vh;
+}
+
+.polaroid {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: clamp(200px, 18.5vw, 280px);
+  padding: 12px 12px 18px;
+  background: var(--cor-papel);
+  rotate: var(--r);
+  box-shadow: 0 18px 32px color-mix(in srgb, var(--cor-sombra) 28%, transparent);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.pode-arrastar .polaroid {
+  cursor: grab;
+  touch-action: none;
+}
+
+.polaroid.arrastando {
+  cursor: grabbing;
+}
+
+.polaroid img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.polaroid figcaption {
+  margin-top: 12px;
+  font-size: clamp(14.5px, 1.15vw, 17px);
+  font-weight: 700;
+  line-height: 1.28;
+}
+
+.polaroid cite {
+  display: block;
+  margin-top: 8px;
+  font-style: normal;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+@media (max-width: 760px) {
+  .mural {
+    padding-top: 12vh;
+  }
+
+  .mural__topo {
+    display: block;
+  }
+
+  .mural__topo p {
+    margin-top: 14px;
+  }
+
+  .mural__dica {
+    display: none;
+  }
+
+  .mural__campo {
+    height: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px 14px;
+  }
+
+  .polaroid {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: auto;
+    padding: 8px 8px 12px;
+  }
+
+  .polaroid:nth-child(even) {
+    margin-top: 28px;
+  }
+
+  .polaroid figcaption {
+    font-size: 13px;
+  }
+
+  .polaroid cite {
+    font-size: 12px;
+  }
+}

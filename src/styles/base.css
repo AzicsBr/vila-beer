@@ -1,0 +1,129 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: clip;
+  -webkit-text-size-adjust: 100%;
+  background: var(--cor-hero);
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+body {
+  margin: 0;
+  font-family: var(--ff-texto);
+  font-size: 17px;
+  line-height: 1.45;
+  color: var(--cor-tinta);
+  background: var(--cor-hero);
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+}
+
+body.carregando {
+  overflow: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+h1,
+h2,
+h3,
+p,
+ul,
+figure {
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+.botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  height: 48px;
+  padding: 0 24px;
+  border: 2.5px solid var(--cor-tinta);
+  border-radius: 999px;
+  font-family: var(--ff-texto);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: var(--sombra-caixa);
+  transition: transform 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out);
+}
+
+@media (hover: hover) {
+  .botao:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 7px 7px 0 var(--cor-tinta);
+  }
+}
+
+.botao:active {
+  transform: translate(3px, 3px);
+  box-shadow: 1px 1px 0 var(--cor-tinta);
+}
+
+.botao--tinta {
+  background: var(--cor-tinta);
+  color: var(--cor-papel);
+  box-shadow: 5px 5px 0 var(--cor-papel);
+  border-color: var(--cor-tinta);
+}
+
+@media (hover: hover) {
+  .botao--tinta:hover {
+    box-shadow: 7px 7px 0 var(--cor-papel);
+  }
+}
+
+.botao--papel {
+  background: var(--cor-papel);
+  color: var(--cor-tinta);
+}
+
+.botao--acento {
+  background: var(--cor-acento);
+  color: var(--cor-tinta);
+}
+
+:focus-visible {
+  outline: 3px solid var(--cor-acento);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition: none !important; /* 0,01 ms faria toda propriedade virar transição, e o fit mediria a palavra no tamanho antigo */
+  }
+}

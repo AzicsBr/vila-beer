@@ -1,0 +1,26 @@
+<!-- Abertura (src/motion/loader.js): cada parte do desenho com data-passo entra na ordem, do jeito de data-jeito
+     (sobe, estala, cai ou desce), e a legenda troca para o <span> de mesmo número. Aqui, uma caneca de chopp:
+     o copo sobe, o chopp cai, a espuma desce e a gota de colarinho estala. -->
+<div class="loader" aria-hidden="true">
+  <div class="loader__box">
+    <svg class="copo" viewBox="0 0 220 240" role="img">
+      <ellipse class="copo__sombra" data-sombra cx="104" cy="226" rx="78" ry="9" />
+      <g class="copo__vidro" data-passo="1" data-jeito="sobe">
+        <path class="copo__alca" d="M156 92h18c14 0 22 10 22 24v38c0 14-8 24-22 24h-18" />
+        <path class="copo__corpo" d="M44 66h120l-6 142c-1 9-7 14-16 14H66c-9 0-15-5-16-14z" />
+      </g>
+      <g class="copo__chopp" data-passo="2" data-jeito="cai">
+        <path class="copo__liquido" d="M56 92h96l-5 112c-0.5 6-4 9-10 9H71c-6 0-9.5-3-10-9z" />
+        <g class="copo__bolhas">
+          <circle cx="82" cy="178" r="4" /><circle cx="96" cy="150" r="3" /><circle cx="122" cy="186" r="4.5" />
+          <circle cx="134" cy="140" r="3" /><circle cx="108" cy="120" r="3.5" /><circle cx="78" cy="128" r="2.5" />
+        </g>
+        <path class="copo__reflexo" d="M68 104l4 92" />
+      </g>
+      <path class="copo__espuma" data-passo="3" data-jeito="desce" d="M36 78c-8-20 8-38 28-32 6-18 32-24 46-10 14-14 40-8 46 12 18-2 28 16 20 32-4 8-12 12-22 10H56c-10 0-17-4-20-12z" />
+      <path class="copo__gota" data-passo="4" data-jeito="estala" d="M52 86c-4 10-6 22-2 30 3 6 11 6 13-1 2-8-2-18-4-29z" />
+    </svg>
+    <p class="loader__passo" aria-live="polite"><span>Gelando a caneca…</span><span>Tirando o chopp…</span><span>Fazendo o colarinho…</span><span>Saúde!</span></p>
+  </div>
+  <svg class="loader__onda" viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0 0h1440v40c-120 50-240 70-360 50S840 20 720 40 480 110 360 100 120 30 0 60z" /></svg>
+</div>

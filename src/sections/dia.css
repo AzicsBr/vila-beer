@@ -1,0 +1,189 @@
+.dia {
+  --bg: var(--cor-fria);
+  --t: var(--cor-papel);
+  position: relative;
+  background: var(--bg);
+  background-image: var(--textura-grao);
+  color: var(--t);
+  /* folga para o arco do cardápio, que sobe por cima da seção anterior: sem ela, o arco cobre as pílulas da última hora */
+  padding-bottom: clamp(70px, 12vw, 160px);
+}
+
+.dia__palco {
+  position: relative;
+  height: 100svh;
+  min-height: 600px;
+  overflow: hidden;
+}
+
+.hora {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  /* o bloco de texto (hora, título, texto) fica junto e centrado na altura; as fotos ocupam a coluna toda */
+  grid-template-rows: 1fr auto auto auto 1fr;
+  column-gap: 4vw;
+  align-items: start;
+  padding: var(--nav-h) var(--margem) 8vh;
+}
+
+.hora + .hora {
+  visibility: hidden;
+}
+
+.hora__num {
+  grid-column: 1;
+  grid-row: 2;
+  font-family: var(--ff-display);
+  font-weight: 400;
+  font-size: clamp(110px, 16vw, 270px);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  /* a cor do número e da sombra dele vêm de data-num e data-num-sombra de cada hora (dia.js) */
+  color: var(--n, var(--t));
+  text-shadow: 0.05em 0.05em 0 var(--s, var(--cor-tinta));
+}
+
+/* minutos menores: <h2 class="hora__num">23h<small>30</small></h2> */
+.hora__num small {
+  font-size: 0.5em;
+}
+
+.hora__titulo {
+  grid-column: 1;
+  grid-row: 3;
+  margin-top: 2vh;
+  font-family: var(--ff-display);
+  font-weight: 400;
+  font-size: clamp(28px, 3.2vw, 50px);
+  line-height: 1.05;
+}
+
+.hora__texto {
+  grid-column: 1;
+  grid-row: 4;
+  margin-top: 16px;
+  max-width: 34ch;
+  font-size: clamp(16px, 1.35vw, 20px);
+  font-weight: 500;
+}
+
+.hora__fotos {
+  grid-column: 2;
+  grid-row: 1 / -1;
+  align-self: center;
+  position: relative;
+  justify-self: end;
+  width: min(100%, 78svh);
+  aspect-ratio: 1;
+}
+
+.hora__fotos img {
+  position: absolute;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border: var(--borda) solid var(--cor-papel);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra-caixa);
+}
+
+.hora__fotos img:first-child {
+  width: 62%;
+  top: 4%;
+  left: 2%;
+  rotate: -6deg;
+}
+
+.hora__fotos img:last-child {
+  width: 52%;
+  right: 2%;
+  bottom: 4%;
+  rotate: 5deg;
+}
+
+
+.dia__horas {
+  position: absolute;
+  z-index: 2;
+  left: var(--margem);
+  bottom: 7vh;
+  display: flex;
+  gap: 10px;
+}
+
+.dia__horas button {
+  height: 40px;
+  padding: 0 16px;
+  border: 2.5px solid var(--t);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--t);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+
+.dia__horas button.ativo {
+  background: var(--t);
+  color: var(--bg);
+}
+
+@media (max-width: 760px) {
+  .hora {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-auto-rows: auto;
+    align-items: start;
+    align-content: start;
+    row-gap: 8px;
+    padding-top: calc(var(--nav-h) + 3vh);
+  }
+
+  .hora__num {
+    font-size: 28vw;
+  }
+
+  .hora__titulo {
+    margin-top: 1vh;
+    font-size: 26px;
+  }
+
+  .hora__texto {
+    margin-top: 10px;
+    font-size: 15px;
+  }
+
+  .hora__fotos {
+    grid-column: 1;
+    grid-row: auto;
+    position: absolute;
+    left: 50%;
+    translate: -50% 0;
+    bottom: 11vh;
+    width: min(92vw, 42svh);
+    aspect-ratio: 5 / 4;
+  }
+
+  .hora__fotos img:first-child {
+    width: 62%;
+  }
+
+  .hora__fotos img:last-child {
+    width: 54%;
+    bottom: 0;
+  }
+
+  .dia__horas {
+    bottom: 4vh;
+    gap: 6px;
+  }
+
+  .dia__horas button {
+    height: 44px;
+    padding: 0 13px;
+    font-size: 13px;
+  }
+}
