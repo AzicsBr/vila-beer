@@ -29,10 +29,7 @@ window.scrollTo(0, 0);
 const html = document.documentElement;
 html.dataset.vivo = ''; // o plano B do <head> (index.html) só age se este módulo não rodar
 const reduzido = matchMedia('(prefers-reduced-motion: reduce)').matches;
-// a abertura toca só na primeira visita da sessão (quem volta do WhatsApp ou recarrega não espera de novo)
-let jaViu = false;
-try { jaViu = sessionStorage.getItem('villa-abertura') === '1'; sessionStorage.setItem('villa-abertura', '1'); } catch {}
-const semEntrada = reduzido || jaViu || new URLSearchParams(location.search).has('pronto');
+const semEntrada = reduzido || new URLSearchParams(location.search).has('pronto');
 // durante a abertura nada atrás dela recebe foco nem clique (teclado, Tab, leitor de tela)
 const conteudo = [...document.querySelectorAll('body > header, body > main, body > footer')];
 conteudo.forEach((el) => { el.inert = true; });
